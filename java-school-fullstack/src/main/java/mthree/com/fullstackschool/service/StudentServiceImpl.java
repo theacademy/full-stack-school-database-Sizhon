@@ -12,62 +12,58 @@ import java.util.List;
 public class StudentServiceImpl implements StudentServiceInterface {
 
     //YOUR CODE STARTS HERE
+    StudentDao studentDao;
 
+    @Autowired
+    public StudentServiceImpl(StudentDao studentDao) {this.studentDao = studentDao;}
 
     //YOUR CODE ENDS HERE
 
     public List<Student> getAllStudents() {
         //YOUR CODE STARTS HERE
-
-        return null;
-
+        return studentDao.getAllStudents();
         //YOUR CODE ENDS HERE
     }
 
     public Student getStudentById(int id) {
         //YOUR CODE STARTS HERE
-
-        return null;
-
+        return studentDao.findStudentById(id);
         //YOUR CODE ENDS HERE
     }
 
     public Student addNewStudent(Student student) {
         //YOUR CODE STARTS HERE
-
-        return null;
-
+        return studentDao.createNewStudent(student);
         //YOUR CODE ENDS HERE
     }
 
     public Student updateStudentData(int id, Student student) {
         //YOUR CODE STARTS HERE
-
-        return null;
-
+        if (id != student.getStudentId()) {
+            student.setStudentFirstName("IDs do not match, student not updated");
+            student.setStudentLastName("IDs do not match, student not updated");
+            return student;
+        }
+        studentDao.updateStudent(student);
+        return studentDao.findStudentById(id);
         //YOUR CODE ENDS HERE
     }
 
     public void deleteStudentById(int id) {
         //YOUR CODE STARTS HERE
-
-
-
+        studentDao.deleteStudent(id);
         //YOUR CODE ENDS HERE
     }
 
     public void deleteStudentFromCourse(int studentId, int courseId) {
         //YOUR CODE STARTS HERE
-
-
-
+        studentDao.deleteStudentFromCourse(studentId, courseId);
         //YOUR CODE ENDS HERE
     }
 
     public void addStudentToCourse(int studentId, int courseId) {
         //YOUR CODE STARTS HERE
-
-
+        studentDao.addStudentToCourse(studentId, courseId);
         //YOUR CODE ENDS HERE
     }
 }
